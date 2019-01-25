@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8" />
+    <title>IBE 운임 제어 리스트</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
+
+<script th:inline="javascript" type="text/javascript">
+    /* <![CDATA[ */
+    function getTest(){
+        $('#fareList').html("");
+        $.getJSON('/getTestFare', function(fare) {
+            $(fare).each(function(){
+                $('#fareList').append('<p>fareType : ' + this.fareType+'seatAvailablity : ' + this.seatAvailablity+'appliedFareAmount : ' + this.appliedFareAmount+ '</p>');
+            });
+        });
+    }
+    /* ]]> */
+</script>
+
+<h3>운임 제어 목록</h3>
+<div th:unless="${#lists.isEmpty(fareControlledVOList)}">
+    <dl th:each="fareControlledVO : ${fareControlledVOList}">
+        <dt>
+            <a th:href="@{/view(num=${fareControlledVO.id})}"><span th:if="${fareControlledVO.eventName}" th:text="${fareControlledVO.eventName}">eventName</span></a></dt>
+        </dt>
+    </dl>
+</div>
+
+<hr />
+
+<h3>운임 제어 작성</h3>
+<form method="POST" th:action="@{/add}">
+    <label for="eventName">eventName:</label>
+    <input type="text" name="eventName" size="50" /><br />
+    <label for="step">step:</label>
+    <input type="text" name="step" size="100" /><br />
+    <label for="eventFareList">eventFareList:</label>
+    <input type="text" name="eventFareList" size="100" /><br />
+    <label for="eventOpenTime">eventOpenTime:</label>
+    <input type="text" name="eventOpenTime" size="100" /><br />
+    <label for="eventOffTime">eventOffTime:</label>
+    <input type="text" name="eventOffTime" size="100" /><br />
+    <label for="isMemberOnly">isMemberOnly:</label>
+    <input type="text" name="isMemberOnly" size="100" /><br />
+    <label for="isPresaleOnly">isPresaleOnly:</label>
+    <input type="text" name="isPresaleOnly" size="100" /><br />
+    <input type="submit" value="추가" />
+</form>
+<hr />
+
+<h3>운임 제어 테스트</h3>
+    <button onclick="getTest()">GET TEST FARE</button>
+<div id="fareList">
+</div>
+<hr />
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8" />
+    <title>IBE 운임 제어</title>
+</head>
+<body>
+<h2>운임 제어 상세보기</h2>
+    <form method="POST" th:action="@{/modify}" th:object="${vo}">
+        <input type="hidden" size="50" th:field="*{id}" />
+        <label for="eventName">eventName:</label>
+        <input type="text" size="50" th:field="*{eventName}" /><br />
+        <label for="step">step:</label>
+        <input type="text" size="50" th:field="*{step}" /><br />
+        <label for="eventFareList">eventFareList:</label>
+        <input type="text" size="50" th:field="*{eventFareList}" /><br />
+        <label for="eventOpenTime">eventOpenTime:</label>
+        <input type="text" size="50" th:field="*{eventOpenTime}" /><br />
+        <label for="eventOffTime">eventOffTime:</label>
+        <input type="text" size="50" th:field="*{eventOffTime}" /><br />
+        <label for="isMemberOnly">isMemberOnly:</label>
+        <input type="text" size="50" th:field="*{memberOnly}" /><br />
+        <label for="isPresaleOnly">isPresaleOnly:</label>
+        <input type="text" size="50" th:field="*{presaleOnly}" /><br />
+
+        <input type="submit" value="수정" />
+        <input type="button" onclick="document." value="목록"/>
+    </form>
+</body>
+</html>
